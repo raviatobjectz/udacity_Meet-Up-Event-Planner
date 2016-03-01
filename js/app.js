@@ -1,6 +1,6 @@
-var app=angular.module('EventPlanner', ['ngMaterial','firebase', 'ngMessages']);
+var app=angular.module('EventPlanner', ['focus-if','ngMaterial','firebase', 'ngMessages']);
 
-app.controller('allTabs', function($scope, $rootScope, $firebaseObject, $mdToast, $document, $timeout, $q) {
+app.controller('allTabs', function($scope, $rootScope, $firebaseObject, $mdToast, $document, $timeout, $q, $element) {
   var ref = new Firebase("https://mini-me.firebaseio.com/USERS");
   $scope.data = $firebaseObject(ref);
   $scope.tabHeading1 = "Login";
@@ -13,7 +13,6 @@ app.controller('allTabs', function($scope, $rootScope, $firebaseObject, $mdToast
   $scope.varD = true;
   $scope.varE = false;
   $scope.login = false;
-  $scope.selectedIndex = 0;
   $scope.user = {}
   $scope.myevent = {};
   $scope.showEvent = {};
@@ -22,6 +21,7 @@ app.controller('allTabs', function($scope, $rootScope, $firebaseObject, $mdToast
   $scope.editEventName = "";
   $scope.sdateflag = true;
   $scope.edateflag = true;
+  $scope.focusInput = 0;
   $scope.states = ('AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS ' +
     'MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI ' +
     'WY').split(' ').map(function(state) {
@@ -244,6 +244,7 @@ app.controller('allTabs', function($scope, $rootScope, $firebaseObject, $mdToast
   $scope.$watch('selectedIndex', function(current, old) {
     if (current == 1 && $scope.editEvent == false) {
       $scope.myevent = {};
+      $scope.myevent.eventname = "";
       $scope.myevent.guestlist = [];
       $scope.myevent.eventhost = $scope.user.firstname+" "+$scope.user.lastname;
       $scope.myevent.address = $scope.user.address;
