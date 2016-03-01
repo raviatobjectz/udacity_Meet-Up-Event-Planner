@@ -1,0 +1,14 @@
+{
+  "name": "eventplanner",
+  "description": "Event Planner app",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "angular": "*",
+    "angular-aria": "*",
+    "angular-animate": "*",
+    "angular-material": "*",
+    "angular-messages": "*",
+    "http-server": "*"
+  }
+}
